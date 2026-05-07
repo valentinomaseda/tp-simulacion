@@ -17,7 +17,7 @@ El sistema está dividido en dos grandes objetivos:
 
 ## 💻 Uso y Parámetros
 
-[cite_start]El programa se ejecuta a través de la consola permitiendo configurar los parámetros de la simulación mediante flags[10, 41]:
+El programa se ejecuta a través de la consola permitiendo configurar los parámetros de la simulación mediante flags[10, 41]:
 
 ```bash
 python programa.py -c <corridas> -n <tiradas> -e <numero> -s <estrategia> -a <capital>
@@ -38,7 +38,7 @@ python programa.py -c <corridas> -n <tiradas> -e <numero> -s <estrategia> -a <ca
 
 ## 📊 Gráficos Generados
 
-[cite_start]El sistema genera un mínimo de **8 gráficas** para el análisis[14]:
+El sistema genera un mínimo de **8 gráficas** para el análisis[14]:
 1.  **Frecuencia relativa** (frn) vs. esperada (fre)[12].
 2.  **Valor promedio** de las tiradas (vpn) vs. esperado (vpe)[12].
 3.  **Valor de la varianza** (vvn) vs. esperada (vve)[12].
@@ -48,7 +48,7 @@ python programa.py -c <corridas> -n <tiradas> -e <numero> -s <estrategia> -a <ca
 
 ## 📄 Informe en LaTeX
 
-[cite_start]Siguiendo las pautas de la cátedra, el informe académico se encuentra desarrollado en **LaTeX** utilizando el template de la Cornell University[16, 26, 53]. 
+Siguiendo las pautas de la cátedra, el informe académico se encuentra desarrollado en **LaTeX** utilizando el template de la Cornell University[16, 26, 53]. 
 
 **Secciones incluidas en el informe[23, 51]:**
 * Abstract (Resumen).
