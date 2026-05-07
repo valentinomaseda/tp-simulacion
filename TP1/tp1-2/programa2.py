@@ -102,7 +102,7 @@ def simular_ruleta():
     for cap in resultados_capitales:
         ax1.plot(cap, alpha=0.5)
     ax1.axhline(y=FCI, color='black', linestyle='--', label='Capital Inicial')
-    ax1.set_title(f'Flujo de Caja - Estrategia: {args.s.upper()} - Capital: {"Finito" if args.a == "f" else "Infinito"}')
+    ax1.set_title(f'Flujo de Caja - Estrategia: {args.s.upper()} - Capital: {"Finito" if args.a == "f" else "Infinito"} - Capital Inicial: {FCI} - Unidad de apuesta: {UNIDAD_APUESTA}')
     ax1.set_ylabel('CC (Cantidad de Capital)')
 
     # Gráfico de Frecuencia Relativa de Éxitos (frsa)
