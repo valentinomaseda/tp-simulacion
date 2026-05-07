@@ -20,7 +20,7 @@ def simular_ruleta():
 
     # FCI = args.i
     FCI = 1000
-    UNIDAD_APUESTA = 10
+    UNIDAD_APUESTA = 100
     secuencia_fib = generar_fibonacci(args.n + 2)
     
     bancarrotas = 0
