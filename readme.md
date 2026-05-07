@@ -65,7 +65,7 @@ python programa.py -c <corridas> -n <tiradas> -e <numero> -s <estrategia> -a <ca
 ---
 [cite_start]*Este proyecto fue realizado para la Universidad Tecnológica Nacional - Facultad Regional Rosario (UTN-FRRO)*[1, 29].
 
-## Referencias
+<!---## Referencias
 
 Completar la lista de referencias numeradas usadas en el texto. Ejemplo:
 
@@ -73,3 +73,4 @@ Completar la lista de referencias numeradas usadas en el texto. Ejemplo:
 2. Autor B. Título. Año.
 
 (Sustituir por las referencias reales y ordenar por número).
+--->
