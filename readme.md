@@ -63,7 +63,7 @@ python programa.py -c <corridas> -n <tiradas> -e <numero> -s <estrategia> -a <ca
 * *Insertar nombre de los integrantes del grupo aquí*
 
 ---
-[cite_start]*Este proyecto fue realizado para la Universidad Tecnológica Nacional - Facultad Regional Rosario (UTN-FRRO)*[1, 29].
+*Este proyecto fue realizado para la Universidad Tecnológica Nacional - Facultad Regional Rosario (UTN-FRRO)*[1, 29].
 
 <!---## Referencias
 
