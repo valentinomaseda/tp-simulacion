@@ -64,7 +64,7 @@ def simular_ruleta():
     # Gráficos de los resultados mediante Matplotlib [cite: 33]
     tiradas_eje = list(range(1, args.n + 1))
     fig, axs = plt.subplots(2, 2, figsize=(12, 8))
-    fig.suptitle(f'Resultados de {args.c} corridas - Número elegido: {args.e}')
+    fig.suptitle(f'Resultados de {args.c} corridas - Cantidad de tiradas: {args.n} - Número elegido: {args.e}')
 
     # Frecuencia Relativa
     for f in todas_frecuencias:
