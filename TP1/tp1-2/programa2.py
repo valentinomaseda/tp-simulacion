@@ -17,14 +17,14 @@ def simular_ruleta():
     parser.add_argument('-a', choices=['f', 'i'], required=True, help='Capital: f (Finito), i (Infinito)')
     args = parser.parse_args()
 
-    # capital_inicial = args.i
-    capital_inicial = 1000
+    
+    capital_inicial = 5000
     UNIDAD_APUESTA = 100
     secuencia_fib = generar_fibonacci(args.n + 2)
     
     bancarrotas = 0
     resultados_capitales = []
-    resultados_frsa = [] # Frecuencia relativa de apuesta favorable
+    resultados_frsa = [] 
 
     for corrida in range(args.c):
         capital = capital_inicial
@@ -40,7 +40,6 @@ def simular_ruleta():
             # Validar capital finito
             if args.a == 'f' and capital < apuesta_actual:
                 bancarrotas += 1
-                # Rellenar con ceros para que todas las listas tengan el mismo largo al graficar
                 historial_capital.extend([0] * (args.n - len(historial_capital) + 1))
                 frsa_acumulada.extend([exitos_apuesta / max(1, len(frsa_acumulada))] * (args.n - len(frsa_acumulada)))
                 break
@@ -50,8 +49,8 @@ def simular_ruleta():
             pago = 0
 
             # --- Lógica de Estrategias ---
-            if args.s in ['m', 'd', 'f']: # Apuestas a PAR (Dinero parejo)
-                gano = (tiro % 2 == 0 and tiro != 0)
+            if args.s in ['m', 'd', 'f']: 
+                gano = (tiro % 2 == 0 and tiro != 0) # Apuestas a PAR
                 if gano:
                     capital += apuesta_actual
                     exitos_apuesta += 1
@@ -71,22 +70,26 @@ def simular_ruleta():
                         idx_fib += 1
                         apuesta_actual = secuencia_fib[idx_fib] * UNIDAD_APUESTA
 
-            # Metodo de Jacobo - Cobertura
+                # --- Método de Jacobo Winograd ---
             elif args.s == 'o': 
-                if 19 <= tiro <= 36: # Números altos
-                    capital += (apuesta_actual * 0.7) # Ganancia neta simplificada
-                    gano = True
-                elif 13 <= tiro <= 18: # Seisena
-                    capital += (apuesta_actual * 1.0)
-                    gano = True
-                elif tiro == 0: # Seguro al cero
-                    capital += (apuesta_actual * 1.6)
-                    gano = True
-                else: # 1 al 12 pierde
-                    capital -= apuesta_actual
+                costo_apuesta = UNIDAD_APUESTA * 16 
                 
-                if gano: exitos_apuesta += 1
+                if args.a == 'f' and capital < costo_apuesta:
+                    bancarrotas += 1
+                    historial_capital.extend([0] * (args.n - len(historial_capital) + 1))
+                    break
 
+                capital -= costo_apuesta 
+                tiro = random.randint(0, 36)
+
+                if tiro == 0 or (22 <= tiro <= 36):
+                    ganancia_tiro = UNIDAD_APUESTA * 36
+                    capital += ganancia_tiro
+                    gano = True
+                    exitos_apuesta += 1
+                else:
+                    gano = False
+    
             historial_capital.append(capital)
             frsa_acumulada.append(exitos_apuesta / t)
 
@@ -101,12 +104,12 @@ def simular_ruleta():
     for cap in resultados_capitales:
         ax1.plot(cap, alpha=0.5)
     ax1.axhline(y=capital_inicial, color='black', linestyle='--', label='Capital Inicial')
-    ax1.set_title(f'Flujo de Caja - Estrategia: {args.s.upper()} - Capital: {"Finito" if args.a == "f" else "Infinito"}')
+    ax1.set_title(f'Flujo de Caja - Cantidad de corridas {args.c} - Cantidad de tiradas: {args.n} - Estrategia: {args.s.upper()} - Capital: {"Finito" if args.a == "f" else "Infinito"}')
     ax1.set_ylabel('CC (Cantidad de Capital)')
 
     # Gráfico de Frecuencia Relativa de Éxitos (frsa)
     for fr in resultados_frsa:
-        ax2.plot(range(1, len(fr)+1), fr, alpha=0.5)
+        ax2.stem(range(1, len(fr)+1), fr, linefmt='-', markerfmt='o', basefmt='k-')
     ax2.set_title('Frecuencia Relativa de Apuestas Favorables')
     ax2.set_xlabel('Número de tiradas (n)')
     ax2.set_ylabel('fr')
