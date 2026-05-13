@@ -15,11 +15,10 @@ def simular_ruleta():
     parser.add_argument('-n', type=int, required=True, help='Cantidad de tiradas')
     parser.add_argument('-s', choices=['m', 'd', 'f', 'o'], required=True, help='Estrategia: m (Martingala), d (D\'Alembert), f (Fibonacci), o (Jacobo)')
     parser.add_argument('-a', choices=['f', 'i'], required=True, help='Capital: f (Finito), i (Infinito)')
-    # parser.add_argument('-i', type=int, default=1000, help='Capital inicial (fci)')
     args = parser.parse_args()
 
-    # FCI = args.i
-    FCI = 1000
+    # capital_inicial = args.i
+    capital_inicial = 1000
     UNIDAD_APUESTA = 100
     secuencia_fib = generar_fibonacci(args.n + 2)
     
@@ -28,8 +27,8 @@ def simular_ruleta():
     resultados_frsa = [] # Frecuencia relativa de apuesta favorable
 
     for corrida in range(args.c):
-        capital = FCI
-        historial_capital = [FCI]
+        capital = capital_inicial
+        historial_capital = [capital_inicial]
         exitos_apuesta = 0
         frsa_acumulada = []
         
@@ -101,7 +100,7 @@ def simular_ruleta():
     # Gráfico de Flujo de Caja (fc)
     for cap in resultados_capitales:
         ax1.plot(cap, alpha=0.5)
-    ax1.axhline(y=FCI, color='black', linestyle='--', label='Capital Inicial')
+    ax1.axhline(y=capital_inicial, color='black', linestyle='--', label='Capital Inicial')
     ax1.set_title(f'Flujo de Caja - Estrategia: {args.s.upper()} - Capital: {"Finito" if args.a == "f" else "Infinito"}')
     ax1.set_ylabel('CC (Cantidad de Capital)')
 
