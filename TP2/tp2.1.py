@@ -4,9 +4,9 @@ import numpy as np
 import scipy.stats as stats
 import matplotlib.pyplot as plt
 
-# ==========================================
+
 # 1. GENERADORES PSEUDOALEATORIOS
-# ==========================================
+
 
 def generador_gcl(seed, a, c, m, n):
     """Generador Congruencial Lineal"""
@@ -14,7 +14,7 @@ def generador_gcl(seed, a, c, m, n):
     x = seed
     for _ in range(n):
         x = (a * x + c) % m
-        numeros.append(x / m) # Normalizamos entre 0 y 1
+        numeros.append(x / m)
     return numeros
 
 def generador_cuadrados_medios(seed, n):
@@ -26,9 +26,9 @@ def generador_cuadrados_medios(seed, n):
         x_cuadrado = str(x ** 2).zfill(largo * 2) # Rellenamos con ceros a la izq
         mitad_inicio = (len(x_cuadrado) - largo) // 2
         x = int(x_cuadrado[mitad_inicio : mitad_inicio + largo])
-        numeros.append(x / (10 ** largo)) # Normalizamos entre 0 y 1
+        numeros.append(x / (10 ** largo)) 
         
-        if x == 0: # Evitar estancamiento en 0
+        if x == 0:
             x = seed + len(numeros)
     return numeros
 
@@ -36,9 +36,9 @@ def generador_python(n):
     """Generador nativo de Python (Mersenne Twister)"""
     return [random.random() for _ in range(n)]
 
-# ==========================================
-# 2. PRUEBAS ESTADÍSTICAS (TESTS) - estos los podemos elegir nosotros el q queremos si quieren cambiar alguno 
-# ==========================================
+
+# 2. TESTS
+
 
 def test_medias(datos, alpha=0.05):
     """Prueba de Medias (Z-test)"""
@@ -93,9 +93,9 @@ def test_rachas(datos, alpha=0.05):
     aprobado = abs(z_calc) < z_crit
     return aprobado, rachas, z_calc, z_crit
 
-# ==========================================
+
 # 3. EJECUCIÓN Y COMPARACIÓN
-# ==========================================
+
 
 if __name__ == "__main__":
     N = 10000 # Cantidad de números a generar
@@ -144,10 +144,9 @@ if __name__ == "__main__":
         t4 = "OK" if test_rachas(sec)[0] else "ERROR"
         print(f"{nombre:<20} | {t1:<8} | {t2:<8} | {t3:<8} | {t4:<8}")
 
-# ==========================================
+
     # 4. GRÁFICA COMPARATIVA (MAPAS DE BITS)
-    # ==========================================
-    # Para tener un buen gráfico cuadrado, calculamos el lado (ej: 100x100 = 10000)
+
     lado = int(math.sqrt(N))
     
     # Recortamos las secuencias para que encajen en una matriz cuadrada perfecta
